@@ -2,12 +2,12 @@ import Header from "../components/Header";
 
 const Home=()=>{
     return(
-        <div className="px-[50px]">
-          <Header />
-          <div>
-        <img src="/home_img.jpg" alt="home" className=" h-screen w-full"  />
-            
+        <div>
+          <Header /> 
+          <div className="px-10">
+        <img src="/home_img.jpg" alt="home" className=" h-screen w-full "  />
           </div>
+         
         </div>
     )
 }
