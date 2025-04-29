@@ -1,8 +1,9 @@
 import { FaLaptop } from "react-icons/fa";import Header from "../components/Header";
 import { MdDownloadForOffline } from "react-icons/md";
 import { TiMessages } from "react-icons/ti";
+import Button from "../components/Button";
 
-const Home=()=>{
+const Home=(className,text)=>{
   const images=["1","2","3","4","5","6","7","8","9","10"];
 
     return(
@@ -31,7 +32,7 @@ const Home=()=>{
 <div className="h-60 w-70 p-4 border rounded-xl">
   <h2 className="font-bold text-xl mb-2">Download your shows to watch offline</h2>
   <p>Save your favorites easily and always have something to watch.</p>
-  <MdDownloadForOffline textAlign={"right"} size={"40px"}/>
+  <MdDownloadForOffline  size={"40px"}/>
 </div>
 <div className="h-60 w-70 p-4 border rounded-xl">
   <h2 className="font-bold text-xl mb-2"> Watch everywhere</h2>
@@ -43,6 +44,32 @@ const Home=()=>{
 <TiMessages />
 </div>
 </div>
+<div className="min-h-100 w-full flex flex-col gap-5 px-50">
+  <h1 className="text-3xl mt-5">Frequently Asked Questions</h1>
+  <div className="h-18 w-full rounded-xl text-xl flex items-center justify-between px-5 bg-gray-400">
+<p>What is Netflix?</p> <span className="text-4xl">+</span>
+  </div>
+  <div className="h-18 w-full rounded-xl text-xl flex items-center justify-between px-5 bg-gray-400">
+<p>How much does Netflix cost?</p> <span className="text-4xl">+</span>
+  </div>
+  <div className="h-18 w-full rounded-xl text-xl flex items-center justify-between bg-gray-400 px-5 ">
+<p>Where can i watch?</p> <span className="text-4xl">+</span>
+  </div>
+  <div className="h-18 w-full rounded-xl text-xl flex items-center justify-between px-5 bg-gray-400 ">
+<p>How can i cancel?</p> <span className="text-4xl">+</span>
+  </div>
+  <div className="h-18 w-full rounded-xl text-xl flex items-center justify-between px-5 bg-gray-400">
+<p>What can i watch on Netflix?</p> <span className="text-4xl">+</span>
+  </div>
+  <div className="h-18 w-full rounded-xl text-xl flex items-center px-5 bg-gray-400">
+<p>Is Netflix good for kids?</p> <span className="text-4xl">+</span>
+  </div>
+</div>
+<div className="px-65 w-full mx-auto left-0 right-0 content-center">
+  <h2 className="my-5 text-lg">Ready to watch? Enter your email to create or restart your membership.</h2>
+                <input type="text" placeholder="Email address" className="h-13 w-90  rounded-3xl px-4 border "/>
+                <Button className={"bg-red-600 h-13 w-58 py-1 px-10 rounded-3xl ml-2"} text={"Get Started"}/>
+            </div>
 </div>
            
           </div>
