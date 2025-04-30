@@ -1,11 +1,10 @@
-import { useState } from "react";
+
 import Button from "./Button";
 import { Link, useLocation } from "react-router-dom";
 
 const Header=({className})=>{
 const location=useLocation()
 const isHome=location.pathname === "/";
-console.log(location)
 
     return(
         <div className="w-full">

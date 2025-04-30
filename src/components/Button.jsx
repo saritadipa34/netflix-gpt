@@ -1,7 +1,7 @@
 
-const Button=({text,className})=>{
+const Button=({text,className,onClick})=>{
     return(
-        <button className={`cursor-pointer border  ${className}`}>
+        <button onClick={onClick} className={`cursor-pointer border  ${className}`}>
 {text}
         </button>
     )
