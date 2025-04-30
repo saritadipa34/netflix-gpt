@@ -3,23 +3,39 @@ import { MdDownloadForOffline } from "react-icons/md";
 import { TiMessages } from "react-icons/ti";
 import Button from "../components/Button";
 
-const Home=(className,text)=>{
+const Home=()=>{
   const images=["1","2","3","4","5","6","7","8","9","10"];
 
     return(
         <div>
+          <div className="flex justify-between">
           <Header /> 
+</div>
           <div className="px-10">
         <img src="/home_img.jpg" alt="home" className=" h-screen w-full "  />
           </div>
           <div className="h-80 w-full px-10 mx-auto left-0 right-0">
             <h1 className="text-white text-4xl my-5 font-bold">Trending Now</h1>
             <div className="flex gap-5 w-200vh">
-{
+            {
   images.map((img,i)=>{
     return <img src={`/img${img}.jpeg`} alt={`img${img}`} key={i} className="h-70 w-45 rounded-2xl" />
   })
 }
+           
+            </div>
+
+            <div className="absolute z-20 top-70 w-150 mx-auto left-0 right-0 ">
+            <div className="text-white flex flex-col gap-5 text-xl">
+                <h1 className="text-6xl font-bold text-center">Unlimited movies,TV shows and more </h1>
+                <p className="font-bold text-center">Starts at ₹149.Cancel at any time.</p>
+                <p className="text-center">Ready to watch? Enter your email to create or restart your membership.</p>
+                <div>
+                <input type="text" placeholder="Email address" className="h-13 w-90  rounded-3xl px-4 border "/>
+                <Button className={"bg-red-600 h-13 w-58 py-1 px-10 rounded-3xl ml-2"} text={"Get Started"}/>
+            </div>
+                        </div>
+
 </div>
 <div className="h-90 w-full text-white p-5">
 <h1 className="text-4xl font-bold mb-5">More reasons to join</h1>
