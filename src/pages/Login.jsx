@@ -1,19 +1,22 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import { ValidateForm } from "../utils/validate";
 
 
 const Login=()=>{
+    const[errorMessage,setErrorMessage]=useState(null);
     const emailOrNumber=useRef(null);
     const password=useRef(null);
 
 const handleSignIn=(e)=>{
 e.preventDefault();
-const email=emailOrNumber.current.value.trim();
-const password=password.current.value.trim();
-const message=ValidateForm(email,password);
-console.log(message);
+const emailValue=emailOrNumber.current.value.trim();
+const passwordValue=password.current.value.trim();
+const message=ValidateForm(emailValue,passwordValue);
+if(message){
+   setErrorMessage(message);
+}
 }
 
     return(
@@ -21,36 +24,34 @@ console.log(message);
 <Header className={"relative z-10"}/>
 <img src="/loginBg.jpeg" alt="" className="absolute top-0 " />
 
-<form action="" className="p-15 min-h-150 w-[450px]  absolute mx-auto left-0 right-0 bg-black opacity-90">
+<form action="" className="px-15 py-10 min-h-150 w-[450px] bsolute mx-auto left-0 right-0 bg-black opacity-90">
 
-<div className="flex flex-col gap-5">
-
-<h1 className="text-3xl font-bold">Sign In</h1>
+<h1 className="text-3xl font-bold mb-4">Sig n In</h1>
 <input type="text" ref={emailOrNumber}
- name="text" className="h-13  w-full px-4 border border-white"  placeholder="Email or mobile number"/>
+ name="text" className="h-13 w-full px-4 mb-4 border border-white"  placeholder="Email or mobile number"/>
 
 <input type="password"
 ref={password}
-name="password" className="h-13 px-4 border border-white w-full" placeholder="Password" />
+name="password" className="h-13 mb-3 px-4 border border-white w-full" placeholder="Password" />
+
+{<p className="text-red-500 mb-2 text-sm text-center">{errorMessage}</p>}
 
 <Button text={"Sign In"} onClick={handleSignIn}
- className={"bg-red-600 w-full h-10 rounded-lg"} />
-<h1 className=" text-center">OR</h1>
+ className={"bg-red-600 w-full mb-2 h-10 rounded-lg"} />
+<h1 className=" text-center mb-2">OR</h1>
 
-<Button className={"bg-gray-400 w-full h-10 rounded-lg"} text={"Use a sign-in code"}/>
-<a href="" className="text-center underline mb-2">Forgot password?</a>
+<Button className={"bg-gray-400 w-full h-10 rounded-lg mb-4"} text={"Use a sign-in code"}/>
+<a href="" className="text-center underline text-md hover:text-gray-500 ">Forgot password?</a>
 
+<div className="flex gap-4 mt-2 items-center mb-2">
+    <input type="checkbox" className="size-4"/>
+    <p className="text-sm">Remember me?</p>
 </div>
 
-<div className="flex gap-4 items-center mb-2">
-    <input type="checkbox" className="size-4" />
-    <p >Remember me?</p>
-</div>
+<p className="text-white mb-2 text-sm">New to Netflix?<span className="font-bold cursor-pointer">Sign up now.</span></p>
+<p className="text-gray-400 text-sm">The page is protected by Google reCAPTCHA to ensure you're not a robot.</p>
 
-<p className="text-gray-400 mb-2">New to Netflix?<span className="font-bold cursor-pointer hover:text-white">Sign up now.</span></p>
-<p className="text-gray-400">The page is protected by Google reCAPTCHA to ensure you're not a robot.</p>
-
-<a href="" className="underline text-sky-400">Learnmore</a>
+<a href="" className="underline text-[14px]  text-sky-400">Learnmore</a>
 
 </form>
         </div>
