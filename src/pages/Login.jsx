@@ -2,7 +2,8 @@ import { useRef, useState } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import { ValidateForm } from "../utils/validate";
-
+import { auth } from "../utils/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Login=()=>{
     const[errorMessage,setErrorMessage]=useState(null);
@@ -14,9 +15,20 @@ e.preventDefault();
 const emailValue=emailOrNumber.current.value.trim();
 const passwordValue=password.current.value.trim();
 const message=ValidateForm(emailValue,passwordValue);
-if(message){
    setErrorMessage(message);
-}
+if(message) return;
+
+createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+  .then((userCredential) => {
+    const user = userCredential.user;
+console.log(user);
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode + errorMessage)
+  });
+
 }
 
     return(
