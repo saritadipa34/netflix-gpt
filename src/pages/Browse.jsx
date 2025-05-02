@@ -1,8 +1,9 @@
+import Header from "../components/Header";
 
 const Browse=()=>{
     return(
-        <div>
-            browse
+        <div className="flex">
+            <Header />
         </div>
     )
 }
