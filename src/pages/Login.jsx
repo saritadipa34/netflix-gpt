@@ -1,54 +1,26 @@
-import { useRef, useState } from "react";
+
 import Button from "../components/Button";
 import Header from "../components/Header";
-import { ValidateForm } from "../utils/validate";
-import { auth } from "../utils/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 
-const Login=()=>{
-    const[errorMessage,setErrorMessage]=useState(null);
-    const emailOrNumber=useRef(null);
-    const password=useRef(null);
 
-const handleSignIn=(e)=>{
-e.preventDefault();
-const emailValue=emailOrNumber.current.value.trim();
-const passwordValue=password.current.value.trim();
-const message=ValidateForm(emailValue,passwordValue);
-   setErrorMessage(message);
-if(message) return;
-
-createUserWithEmailAndPassword(auth, emailValue, passwordValue)
-  .then((userCredential) => {
-    const user = userCredential.user;
-console.log(user);
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode + errorMessage)
-  });
-
-}
+const Login=()=>{   
 
     return(
         <div className="text-white">
 <Header className={"relative z-10"}/>
 <img src="/loginBg.jpeg" alt="" className="absolute top-0 " />
 
-<form action="" className="px-15 py-10 min-h-150 w-[450px] bsolute mx-auto left-0 right-0 bg-black opacity-90">
+<form action="" className="px-15 py-10 min-h-150 w-[450px] mx-auto bg-black opacity-90">
 
-<h1 className="text-3xl font-bold mb-4">Sig n In</h1>
-<input type="text" ref={emailOrNumber}
+<h1 className="text-3xl font-bold mb-4">Sign In</h1>
+<input type="text" 
  name="text" className="h-13 w-full px-4 mb-4 border border-white"  placeholder="Email or mobile number"/>
 
 <input type="password"
-ref={password}
+
 name="password" className="h-13 mb-3 px-4 border border-white w-full" placeholder="Password" />
 
-{<p className="text-red-500 mb-2 text-sm text-center">{errorMessage}</p>}
-
-<Button text={"Sign In"} onClick={handleSignIn}
+<Button text={"Sign In"} 
  className={"bg-red-600 w-full mb-2 h-10 rounded-lg"} />
 <h1 className=" text-center mb-2">OR</h1>
 

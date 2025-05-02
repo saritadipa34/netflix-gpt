@@ -2,9 +2,36 @@ import { FaLaptop } from "react-icons/fa";import Header from "../components/Head
 import { MdDownloadForOffline } from "react-icons/md";
 import { TiMessages } from "react-icons/ti";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { ValidateEmail } from "../utils/validate";
 
 const Home=()=>{
+  const inputEmail=useRef(null);
+  const[inputError,setInputError]=useState(null);
+  const[email,setEmail]=useState("");
+  const navigate=useNavigate();
   const images=["1","2","3","4","5","6","7","8","9","10"];
+
+const handleEmailBtn=()=>{
+  const emailValue=inputEmail.current.value;
+const validation= ValidateEmail(emailValue);
+
+if(emailValue.trim() === "" ){
+  setInputError("Please Enter email")
+  return;
+} 
+
+if(validation){
+ setInputError("Enter valid Email");
+  return;
+}
+  navigate("/signup") 
+ }
+
+const handleEmail=(e)=>{
+setEmail(e.target.value);
+}
 
     return(
         <div>
@@ -31,10 +58,12 @@ const Home=()=>{
                 <p className="font-bold text-center">Starts at ₹149.Cancel at any time.</p>
                 <p className="text-center">Ready to watch? Enter your email to create or restart your membership.</p>
                 <div>
-                <input type="text" placeholder="Email address" className="h-13 w-90  rounded-3xl px-4 border "/>
-                <Button className={"bg-red-600 h-13 w-58 py-1 px-10 rounded-3xl ml-2"} text={"Get Started"}/>
+                <input ref={inputEmail}  onChange={handleEmail} type="text" placeholder="Email address" className="h-13 w-90  rounded-3xl px-4 border" required/>
+                <Button onClick={handleEmailBtn}
+                className={"bg-red-600 h-13  w-58 py-1 px-10 rounded-3xl ml-2"} text={"Get Started"}/>
+                {inputError}
             </div>
-                        </div>
+            </div>
 
 </div>
 <div className="h-90 w-full text-white p-5">
@@ -83,8 +112,9 @@ const Home=()=>{
 </div>
 <div className="px-65 w-full mx-auto left-0 right-0 content-center">
   <h2 className="my-5 text-lg">Ready to watch? Enter your email to create or restart your membership.</h2>
-                <input type="text" placeholder="Email address" className="h-13 w-90  rounded-3xl px-4 border "/>
-                <Button className={"bg-red-600 h-13 w-58 py-1 px-10 rounded-3xl ml-2"} text={"Get Started"}/>
+                <input type="text"  onChange={handleEmail} value={email} placeholder="Email address" className="h-13 w-90  rounded-3xl px-4 border" required/>
+                <Button onClick={handleEmailBtn}
+                   className={"bg-red-600 h-13 w-58 py-1 px-10 rounded-3xl ml-2"} text={"Get Started"}/>
             </div>
 </div>
            

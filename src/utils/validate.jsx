@@ -12,3 +12,9 @@ export const ValidateForm=(emailOrNumber,password)=>{
 
     return null;
 }
+
+export const ValidateEmail=(emailId)=>{
+   const validEmailAddress=/^(?=[a-z0-9._%+-]*\d)[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}$/i.test(emailId);
+    if(!validEmailAddress) return "Email is not valid";
+    return null; 
+}
