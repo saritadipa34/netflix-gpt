@@ -1,14 +1,31 @@
 
 import Button from "./Button";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
+
 
 const Header=({className})=>{
 const location=useLocation()
 const isHome=location.pathname === "/";
 const isBrowse=location.pathname === "/browse";
+const navigate=useNavigate();
+
+const handleSignOut=()=>{
+signOut(auth).then(() => {
+  navigate("/login");
+  // Sign-out successful.
+}).catch((error) => {
+  navigate("/Home");
+  // An error happened.
+  console.log(error);
+});
+
+  console.log("sign out");
+}
 
     return(
         <div className="w-full">
@@ -16,7 +33,7 @@ const isBrowse=location.pathname === "/browse";
             <div className=" flex justify-between items-center bg-gradient-to-b from-black ">
            <img className="h-20 w-45 relative z-10 " src="/logo.jpeg" alt="logo" />
            { isHome && <div className="flex gap-5">
-            <Button text={" English"} className={`bg-transparent text-white px-4 h-8 py-1 rounded-3xl ${className} `} />
+            <Button text={"English"} className={`bg-transparent text-white px-4 h-8 py-1 rounded-3xl ${className} `} />
             <Link to="/login" className={"bg-white px-4 py-1 h-8 rounded-3xl"}>Sign in</Link>
             </div>}
 
@@ -37,6 +54,7 @@ const isBrowse=location.pathname === "/browse";
 <Link>Children</Link>
 <IoIosNotifications />
 <FaUserAlt />
+<button onClick={handleSignOut} className="border border-white text-white p-2 cursor-pointer">sign out</button>
 </div>
     </div>
 }

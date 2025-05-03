@@ -6,16 +6,20 @@ import { auth } from "../utils/firebase";
 import { useRef } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAuth, updateProfile } from "firebase/auth";
+
 
 const Login=()=>{
   const navigate=useNavigate();
-  const emailOrNumber=useRef(null);
+  const name=useRef(null);
+  const email=useRef(null);
   const password=useRef(null);
   const[errorMessage,setErrorMessage]=useState(null);
   
   const handleSignIn=(e)=>{
   e.preventDefault();
-  const emailValue=emailOrNumber.current.value.trim();
+  const nameValue=name.current.value.trim();
+  const emailValue=email.current.value.trim();
   const passwordValue=password.current.value.trim();
   const signInMsg=ValidateForm(emailValue,passwordValue);
        setErrorMessage(signInMsg);
@@ -23,7 +27,18 @@ const Login=()=>{
 
   signInWithEmailAndPassword(auth, emailValue, passwordValue)
   .then((userCredential) => {
+
     const user = userCredential.user;
+const auth = getAuth();
+updateProfile(auth.currentUser, {
+  displayName: name.current.value, photoURL: ""
+}).then(() => {
+  // Profile updated!
+  // ...
+}).catch((error) => {
+  // An error occurred
+  // ...
+});
     navigate("/browse");
   })
   .catch((error) => {
@@ -31,7 +46,8 @@ const Login=()=>{
     const errorMessage = error.message;
     setErrorMessage(errorCode + errorMessage);
   });
-  localStorage.setItem('user',JSON.stringify('userName'));
+  // localStorage.setItem('user',JSON.stringify('userName'));
+  // localStorage.setItem('name',JSON.stringify('name'));
   }
 
     return(
@@ -42,12 +58,17 @@ const Login=()=>{
 <form action="" className="px-15 py-10 min-h-150 w-[450px] mx-auto bg-black opacity-90">
 
 <h1 className="text-3xl font-bold mb-4">Sign In</h1>
-<input type="text" ref={emailOrNumber}
- name="text" className="h-13 w-full px-4 mb-4 border border-white"  placeholder="Email or mobile number"/>
+
+<input type="text"
+ref={name}
+name="name" className="h-13 mb-3 px-4 border border-white w-full" placeholder="Enter your name" />
+
+<input type="text" ref={email}
+ name="text" className="h-13 w-full px-4 mb-4 border border-white"  placeholder="Enter your Email"/>
 
 <input type="password"
 ref={password}
-name="password" className="h-13 mb-3 px-4 border border-white w-full" placeholder="Password" />
+name="password" className="h-13 mb-3 px-4 border border-white w-full" placeholder=" Enter your Password" />
 
 {<p className="text-red-500 mb-2 text-sm text-center">{errorMessage}</p>}
 
