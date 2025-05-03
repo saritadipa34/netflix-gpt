@@ -24,13 +24,11 @@ const Login=()=>{
   signInWithEmailAndPassword(auth, emailValue, passwordValue)
   .then((userCredential) => {
     const user = userCredential.user;
-    console.log(user); 
     navigate("/browse");
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(errorCode + errorMessage);
     setErrorMessage(errorCode + errorMessage);
   });
   localStorage.setItem('user',JSON.stringify('userName'));
