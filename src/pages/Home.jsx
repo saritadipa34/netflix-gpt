@@ -38,7 +38,7 @@ setEmail(e.target.value);
           <div className="flex justify-between">
           <Header /> 
 </div>
-          <div className="px-10">
+          <div className="px-10"> 
         <img src="/home_img.jpg" alt="home" className=" h-screen w-full "  />
           </div>
           <div className="h-80 w-full px-10 mx-auto left-0 right-0">

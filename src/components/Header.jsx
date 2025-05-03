@@ -13,8 +13,7 @@ const isBrowse=location.pathname === "/browse";
     return(
         <div className="w-full">
           
-            <div className=" flex  justify-between items-center bg-gradient-to-b from-black ">
-              <div className="flex gap-5">
+            <div className=" flex justify-between items-center bg-gradient-to-b from-black ">
            <img className="h-20 w-45 relative z-10 " src="/logo.jpeg" alt="logo" />
            { isHome && <div className="flex gap-5">
             <Button text={" English"} className={`bg-transparent text-white px-4 h-8 py-1 rounded-3xl ${className} `} />
@@ -23,7 +22,7 @@ const isBrowse=location.pathname === "/browse";
 
 {
   isBrowse && <div className="flex gap-40 justify-between items-center">
-<ul className="flex text-white gap-5">
+<ul className="flex text-white gap-5 text-sm">
   <Link>Home</Link>
   <Link>TV Shows</Link>
   <Link>Movies</Link>
@@ -33,7 +32,7 @@ const isBrowse=location.pathname === "/browse";
   <Link>Browse by Languages</Link>
 </ul>
 
-<div className=" flex gap-2 text-white">
+<div className=" flex gap-5 text-sm items-center text-white">
 <IoSearch />
 <Link>Children</Link>
 <IoIosNotifications />
@@ -42,7 +41,6 @@ const isBrowse=location.pathname === "/browse";
     </div>
 }
 </div>
-          </div>
           </div>
 
     )
