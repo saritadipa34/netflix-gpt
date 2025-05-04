@@ -3,9 +3,13 @@ import { auth } from "../utils/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRef,useState } from "react";
 import Button from "../components/Button";
+import { updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import addUser from "../utils/appStore"
 
 const Signup=()=>{
+  const dispatch=useDispatch();
   const navigate=useNavigate();
   const name=useRef(null);
     const email=useRef(null);
@@ -25,7 +29,24 @@ const handleSignUp=(e)=>{
     createUserWithEmailAndPassword(auth, emailValue, passwordValue)
     .then((userCredential) => {
       const user = userCredential.user;
-      navigate("/login");
+     
+updateProfile(user, {
+  displayName: nameValue, photoURL:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/640px-User_icon_2.svg.png"
+}).then(() => {
+  const {uid,displayName,email,photoURL }= auth.currentUser;
+  console.log(user)
+  console.log(auth.currentUser)
+dispatch(addUser({uid:user.uid,email:user.email,displayName:user.displayName ,photoURL:user.photoURL}));
+
+  // Profile updated!
+  // ...
+}).catch((error) => {
+
+  // An error occurred
+  // ...
+});
+navigate("/browse");
+
     console.log(user);
     })
     .catch((error) => {

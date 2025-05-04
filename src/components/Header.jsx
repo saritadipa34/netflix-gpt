@@ -5,9 +5,11 @@ import { IoSearch } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useSelector } from "react-redux";
 
 const Header=({className})=>{
-const location=useLocation()
+const user=useSelector(store=>store.user);
+const location=useLocation();
 const isHome=location.pathname === "/";
 const isBrowse=location.pathname === "/browse";
 const navigate=useNavigate();
@@ -51,7 +53,7 @@ signOut(auth).then(() => {
 <IoSearch />
 <Link>Children</Link>
 <IoIosNotifications />
-<img src="https://www.wackybuttons.com/designcodes/0/110/1108492.png" className="h-8 w-8 rounded-xl" alt="" />
+<img src={user?.photoURL} className="h-8 w-8 rounded-xl" alt="user" />
 <button onClick={handleSignOut} className="border border-white text-white p-2 cursor-pointer">sign out</button>
 </div>
     </div>

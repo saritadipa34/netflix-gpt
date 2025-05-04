@@ -6,7 +6,6 @@ import { auth } from "../utils/firebase";
 import { useRef } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, updateProfile } from "firebase/auth";
 
 
 const Login=()=>{
@@ -29,16 +28,7 @@ const Login=()=>{
   .then((userCredential) => {
 
     const user = userCredential.user;
-const auth = getAuth();
-updateProfile(auth.currentUser, {
-  displayName: name.current.value, photoURL: "./dipa.jpg"
-}).then(() => {
-  // Profile updated!
-  // ...
-}).catch((error) => {
-  // An error occurred
-  // ...
-});
+
     navigate("/browse");
   })
   .catch((error) => {
