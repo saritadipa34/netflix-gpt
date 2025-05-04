@@ -21,7 +21,7 @@ const Login=()=>{
   const nameValue=name.current.value.trim();
   const emailValue=email.current.value.trim();
   const passwordValue=password.current.value.trim();
-  const signInMsg=ValidateForm(emailValue,passwordValue);
+  const signInMsg=ValidateForm(nameValue,emailValue,passwordValue);
        setErrorMessage(signInMsg);
   if(signInMsg) return;
 
@@ -31,7 +31,7 @@ const Login=()=>{
     const user = userCredential.user;
 const auth = getAuth();
 updateProfile(auth.currentUser, {
-  displayName: name.current.value, photoURL: ""
+  displayName: name.current.value, photoURL: "./dipa.jpg"
 }).then(() => {
   // Profile updated!
   // ...
@@ -46,8 +46,7 @@ updateProfile(auth.currentUser, {
     const errorMessage = error.message;
     setErrorMessage(errorCode + errorMessage);
   });
-  // localStorage.setItem('user',JSON.stringify('userName'));
-  // localStorage.setItem('name',JSON.stringify('name'));
+
   }
 
     return(
@@ -61,14 +60,14 @@ updateProfile(auth.currentUser, {
 
 <input type="text"
 ref={name}
-name="name" className="h-13 mb-3 px-4 border border-white w-full" placeholder="Enter your name" />
+name="name" className="h-13 mb-3 px-4 border border-white w-full" placeholder="Enter your name" required/>
 
 <input type="text" ref={email}
- name="text" className="h-13 w-full px-4 mb-4 border border-white"  placeholder="Enter your Email"/>
+ name="text" className="h-13 w-full px-4 mb-4 border border-white"  placeholder="Enter your Email" required/>
 
 <input type="password"
 ref={password}
-name="password" className="h-13 mb-3 px-4 border border-white w-full" placeholder=" Enter your Password" />
+name="password" className="h-13 mb-3 px-4 border border-white w-full" placeholder=" Enter your Password" required/>
 
 {<p className="text-red-500 mb-2 text-sm text-center">{errorMessage}</p>}
 

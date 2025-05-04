@@ -3,10 +3,8 @@ import Button from "./Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
-import { FaUserAlt } from "react-icons/fa";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-
 
 const Header=({className})=>{
 const location=useLocation()
@@ -53,7 +51,7 @@ signOut(auth).then(() => {
 <IoSearch />
 <Link>Children</Link>
 <IoIosNotifications />
-<FaUserAlt />
+<img src="https://www.wackybuttons.com/designcodes/0/110/1108492.png" className="h-8 w-8 rounded-xl" alt="" />
 <button onClick={handleSignOut} className="border border-white text-white p-2 cursor-pointer">sign out</button>
 </div>
     </div>

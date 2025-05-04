@@ -18,14 +18,14 @@ const handleSignUp=(e)=>{
     const nameValue=name.current.value;
     const emailValue=email.current.value.trim();
     const passwordValue=password.current.value.trim();
-    const message=ValidateForm(emailValue,passwordValue);
+    const message=ValidateForm(nameValue,emailValue,passwordValue);
        setErrorMessage(message);
     if(message) return;
     
     createUserWithEmailAndPassword(auth, emailValue, passwordValue)
     .then((userCredential) => {
       const user = userCredential.user;
-      navigate("/login")
+      navigate("/login");
     console.log(user);
     })
     .catch((error) => {
