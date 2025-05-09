@@ -4,18 +4,16 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRef,useState } from "react";
 import Button from "../components/Button";
 import { updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import addUser from "../utils/appStore"
+import Header from "../components/Header";
 
 const Signup=()=>{
   const dispatch=useDispatch();
-  const navigate=useNavigate();
   const name=useRef(null);
     const email=useRef(null);
     const password=useRef(null);
     const[errorMessage,setErrorMessage]=useState(null);
-
 
 const handleSignUp=(e)=>{
     e.preventDefault();
@@ -41,11 +39,10 @@ dispatch(addUser({uid:user.uid,email:user.email,displayName:user.displayName ,ph
   // Profile updated!
   // ...
 }).catch((error) => {
-
+setErrorMessage(error);
   // An error occurred
   // ...
 });
-navigate("/browse");
 
     console.log(user);
     })
@@ -59,7 +56,8 @@ navigate("/browse");
 
     return(
         <div className=" h-full w-full text-white flex items-center justify-center">
-<form action="" className="px-15 py-10 min-h-100 w-[450px]  bg-black opacity-90">
+          <Header />
+<form action="" className="px-15 py-10 min-h-100 w-[450px] absolute top-30   mx-auto left-0 right-0 bg-black opacity-90">
 
 <h1 className="text-3xl font-bold mb-4">Sign up</h1>
 

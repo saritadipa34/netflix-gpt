@@ -5,11 +5,11 @@ import { ValidateForm } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import { useRef } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 
 const Login=()=>{
-  const navigate=useNavigate();
+ 
   const name=useRef(null);
   const email=useRef(null);
   const password=useRef(null);
@@ -28,8 +28,6 @@ const Login=()=>{
   .then((userCredential) => {
 
     const user = userCredential.user;
-
-    navigate("/browse");
   })
   .catch((error) => {
     const errorCode = error.code;
