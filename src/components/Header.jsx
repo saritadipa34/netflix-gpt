@@ -5,7 +5,7 @@ import { IoSearch } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 const Header=({className})=>{
@@ -62,7 +62,7 @@ signOut(auth).then(() => {
     </div>
 }
 </div>
-          </div>
+      </div>
 
     )
 } 

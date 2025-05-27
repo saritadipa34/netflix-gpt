@@ -24,7 +24,7 @@ const App=()=>{
         // ...
       } else {
         dispatch(removeUser());
-        navigate("/")
+        navigate("/");
         // User is signed out
         // ...
       }
