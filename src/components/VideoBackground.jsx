@@ -1,23 +1,42 @@
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTrailers } from "../utils/movieSlice";
+
 const VideoBackground=({movieId})=>{
+    const dispatch=useDispatch();
+    const trailerUrl=useSelector((state)=>state.movie.addTrailerList[movieId])
 
     useEffect(()=>{
-        const apiKey=import.meta.env.VITE_API_KEY;
-        const getMovieTrailer=async(movieId)=>{
-            const response=await fetch( `https://www.omdbapi.com/?i=${encodeURIComponent(movieId)}&apikey=${apiKey}`);
-            const data=await response.json();
-            console.log(data);
-        }
-        getMovieTrailer("tt1877830");
-    },[movieId]);
+        const omdbapiKey=import.meta.env.VITE_API_KEY;
+        const youTubeAPI=import.meta.env.VITE_YOUTUBE_KEY;
+    
+        const getMovieTitle=async(movieId)=>{
+            const response=await fetch(`https://www.omdbapi.com/?i=${encodeURIComponent(movieId)}&apikey=${omdbapiKey}`);
+            const omdbData=await response.json();
+            console.log(omdbData);
+            const query=(`${omdbData.Title}`);
 
- const getYouTubeEmbedUrl = (movieId) =>
-    `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent( movieId + " trailer")}`;
+
+const youtubeUrl=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodeURIComponent(query)}&key=${youTubeAPI}&type=video`)
+ const youtubeData=await youtubeUrl.json();
+ 
+const videoId=youtubeData.items[0].id.videoId;
+ const youtubeEmbedUrl = `https://www.youtube.com/embed/${videoId}`;
+
+ console.log(youtubeData)
+        dispatch(addTrailers({movieId, url:youtubeEmbedUrl}))
+        console.log(omdbData.Title); 
+        }
+   
+        getMovieTitle(movieId); 
+    },[movieId,dispatch]);
+
 
     return(
-        <div>
-            videobackground
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/NLOp_6uPccQ?si=MQo76T3rJhjqpELc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div className="relative z-10">
+            { trailerUrl ? (<iframe src={trailerUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share "></iframe>):
+            (<p>Loading.....</p>)
+            }
         </div>
     )
 }

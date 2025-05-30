@@ -37,7 +37,7 @@ signOut(auth).then(() => {
             <Button text={"English"} className={`bg-transparent text-white px-4 h-8 py-1 rounded-3xl ${className} `} />
             <Link to="/login"
           
-            className={"bg-white px-4 py-1 h-8 rounded-3xl"}>Sign in</Link>
+          className={"bg-white px-4 py-1 h-8 rounded-3xl"}>Sign in</Link>
             </div>}
 
 {
