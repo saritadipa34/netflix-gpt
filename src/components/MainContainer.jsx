@@ -8,7 +8,6 @@ if(!movie) return;
 const mainMovie=movie.Search[0];
 const {Poster,Title,imdbID}=mainMovie;
 
-console.log(mainMovie)
     return(
         <div>
             <VideoTitle Poster={Poster} Title={Title}  />
